@@ -1,0 +1,23 @@
+name: List Cloud Resources
+run-name: "CSC-${{ inputs.deploymentID }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploymentID:
+        description: ServiceNow Deployment ID
+        required: true
+        type: string
+
+jobs:
+  list-resources:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List resources by deploymentID
+        run: |
+          echo "=== CSC Resource Discovery ==="
+          echo "Deployment ID: ${{ github.event.inputs.deploymentID }}"
+          echo "Querying resources tagged with deploymentID=${{ github.event.inputs.deploymentID }}"
+          sleep 2
+          echo "Found: vm-csc-${{ github.event.inputs.deploymentID }}"
+          echo "Status: Running | IP: 10.0.1.42 | Region: australiaeast"
