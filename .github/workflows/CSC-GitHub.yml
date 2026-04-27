@@ -1,0 +1,45 @@
+name: CSC-GitHub
+
+run-name: "CSC-${{ inputs.deploymentID }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploymentID:
+        description: Hostname prefix
+        required: true
+        type: string
+      vm_size:
+        description: VM type
+        required: true
+        type: choice
+        options:
+          - RedHat Enterprise Linux Small
+          - RedHat Enterprise Linux Large
+          - Windows Server Small
+          - Windows Server Large
+      region:
+        description: Azure datacentre
+        required: true
+        type: choice
+        options:
+          - New Zealand North
+          - Australia East
+      landingZone:
+        description: Landing zone
+        required: false
+        type: choice
+        options:
+          - Choice 1
+          - Choice 2
+          - Choice 3      
+
+jobs:
+  test-connection:
+    runs-on: ubuntu-latest    
+    steps:
+      - run: echo "🎉 Success! The ServiceNow Cloud Service Catalogue job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🌏 Datacentre is Azure ${{ inputs.region }}."
+      - run: echo "🖥️ Requested VM is ${{ inputs.vm_size }}."
+      - run: echo "🚪 Landing Zone is ${{ inputs.landingZone }}."
